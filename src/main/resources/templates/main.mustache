@@ -6,7 +6,25 @@
 </head>
 <body>
 <div>
-    Under construction =)
+    <form method="post">
+        <input type="text" name="text" placeholder="Text">
+        <input type="text" name="tag" placeholder="Tag">
+        <button type="submit">Добавить</button>
+    </form>
 </div>
+<div>Список сообщений</div>
+<div>
+    <form action="/filter" method="post">
+        <input type="text" name="filter">
+        <button type="submit">Find</button>
+    </form>
+</div>
+{{#messages}}
+    <div>
+        <b>{{id}}</b>
+        <span>{{text}}</span>
+        <b>{{tag}}</b>
+    </div>
+{{/messages}}
 </body>
 </html>
