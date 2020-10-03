@@ -1,0 +1,20 @@
+<html>
+<head>
+
+</head>
+
+<body>
+<div>
+    Add new user
+    {{#message}}
+        {{message}}
+    {{/message}}
+</div>
+<form action="/registration" method="post">
+    <div><label>User name: <input type="text" name="username"></label></div>
+    <div><label>Password: <input type="password" name="password"></label></div>
+    <input type="hidden" name="_csrf" value="{{_csrf.token}}"/>
+    <div><input type="submit" value="Registration"/></div>
+</form>
+</body>
+</html>

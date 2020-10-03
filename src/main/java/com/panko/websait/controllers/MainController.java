@@ -10,28 +10,28 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.Map;
 
 @Controller
-public class GreetingsController {
+public class MainController {
 
     private final MessageRepository messageRepository;
 
-    public GreetingsController(MessageRepository messageRepository) {
+    public MainController(MessageRepository messageRepository) {
         this.messageRepository = messageRepository;
     }
 
-    @GetMapping("/greeting")
+    @GetMapping("/")
     public String greeting(@RequestParam(required = false) String name, Map<String, Object> model) {
 
         return "greeting";
     }
 
-    @GetMapping
+    @GetMapping("/main")
     public String main(Map<String, Object> model) {
         model.put("messages", messageRepository.findAll());
 
         return "main";
     }
 
-    @PostMapping
+    @PostMapping("/main")
     public String add(@RequestParam String text, @RequestParam String tag, @RequestParam Map<String, Object> model) {
         messageRepository.save(new Message(text, tag));
 
