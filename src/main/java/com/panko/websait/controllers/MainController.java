@@ -1,7 +1,9 @@
 package com.panko.websait.controllers;
 
 import com.panko.websait.models.Message;
+import com.panko.websait.models.User;
 import com.panko.websait.repositories.MessageRepository;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -32,8 +34,12 @@ public class MainController {
     }
 
     @PostMapping("/main")
-    public String add(@RequestParam String text, @RequestParam String tag, @RequestParam Map<String, Object> model) {
-        messageRepository.save(new Message(text, tag));
+    public String add(@AuthenticationPrincipal User user,
+                      @RequestParam String text,
+                      @RequestParam String tag,
+                      @RequestParam Map<String, Object> model) {
+
+        messageRepository.save(new Message(text, tag, user));
 
         Iterable<Message> messages = messageRepository.findAll();
         model.put("messages", messages);
